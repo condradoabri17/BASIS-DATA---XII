@@ -8,32 +8,33 @@ Berikut ini langkah-langkah Instalasi Git Bash:
 
 **Langkah 1:**
 Masuk ke Browser lalu ketikan "Download Git-scm for windows". lalu carilah sampai menemukan link pada gambar. Setelah menemukannya klik agar masuk ke dalam link tersebut.
-![[Belajar_Github/Asset/gambar1.png]]
+![[Belajar_Github/Asset/gambar1.jpg]]
 
 **Langkah 2:**
 Setelah masuk maka kita akan langsung diarahkan ke halaman download. klik tombol download sesuai dengan sistem operasi yang digunakan, dalam praktek ini, kita akan menggunakan lik download untuk windows.
 
-![[Belajar_Github/Asset/gambar2.png]]
+![[null]]
+![[Belajar_Github/Asset/gambar2.jpg]]
 
 **Langkah 3:**
 Klik link download yang sesuai dengan jenis bit pada perangkat kita. Pada praktik kali ini kita akan gunakan link yang 64-biit
-![[Belajar_Github/Asset/gambar3.png]]
+![[Belajar_Github/Asset/gambar3.jpg]]
 
 **Langkah 4:**
 Setelah link diklik, maka program akan otomatis mengunduh file exe nya. tunggu sampai selesai.
 
-![[Belajar_Github/Asset/gambar4.png]]
+![[Belajar_Github/Asset/gambar4.jpg]]
 
 **Langkah 5:**
 Setelah file exe berhasil ter-download, selanjutnya adalah masuk klik buka file atau buka file exe di folder download
 /ima
-![[Belajar_Github/Asset/gambar5.png]]
+![[Belajar_Github/Asset/gambar5.jpg]]
 **Langkah 6:**
 Setelah file exe diklik, maka kita akan diarahkan ke halaman penginstalan. untuk halaman penginstalan cukup di kllik tombol next setiap kali berpindah halaman, sampai pada akhirnya, proses penginstalan mulai berjalan dan selesai. 
 
 **Langkah 7:**
 Setelah penginstalan selesai maka kita akan otomatis masuk ke aplikasi Git Bash nya
-![[Belajar_Github/Asset/gambar6.png]]
+![[Belajar_Github/Asset/gambar6.jpg]]
 
 # Masuk ke Github
 Sekarang kita akan mulai masuk ke dalam github. Berikut langkah-langkahnya:
@@ -41,19 +42,21 @@ Sekarang kita akan mulai masuk ke dalam github. Berikut langkah-langkahnya:
 **Langkah 1:**
 Buka browser lalu ketik "github.com" lalu setelah masuk, klik link seperti pada gambar
 
-![[Belajar_Github/Asset/gambar7.png]]
+![[Belajar_Github/Asset/gambar7.jpg]]
 
 **Langkah 2:**
-Setelah masuk ke link maka kita akan diarahkan ke landing-page. Di halaman ini cari tombol Sign in dan lakukan login dengan akun google saja.
-![[Belajar_Github/Asset/gambar8.png]]
+Setelah masuk ke link maka kita akan diarahkan ke landing-page. Di halaman ini cari tombol Sign in dan lakukan login dengan akun github kita.
+
+![[Belajar_Github/Asset/gambar8.jpg]]
 
 **Langkah 3:**
 Setelah masuk ke halaman sign in maka lakukan login dengan akun github kita. Jika belum memiliki akun github, maka lakukan register atay sign up terlebih dahulu
-![[Belajar_Github/Asset/gambar9.png]]
+![[Belajar_Github/Asset/gambar9.jpg]]
 
 **Langkah 4:**
 Setelah login berhasil maka kita akan masuk ke halaman utama github. Dengan demikian maka kita sudah berhasil login.
-![[Belajar_Github/Asset/gambar10.png]]
+
+![[Belajar_Github/Asset/gambar10.jpg]]
 # Membuat Repository di Github
 Repository adalah adalah tempat penyimpanan proyek atau koleksi berkas yang dikelola dengan sistem kontrol versi Git. Setiap repositori dapat berisi kode sumber, file dokumentasi, dan berkas lain yang terkait dengan proyek. Repositori juga menyimpan riwayat perubahan, sehingga memungkinkan pengembang untuk melacak dan mengelola setiap perubahan yang dilakukan pada proyek tersebut.
 
@@ -61,16 +64,16 @@ Pada github mari kita membuat repository untuk dimasukan proyek didalamnya:
 
 **Langkah 1:**
 Klik ikon "+" pada bagian atas dekat avatar dan klik New repository
-![[Belajar_Github/Asset/gambar11.png]]
+![[Belajar_Github/Asset/gambar11.jpg]]
 
 **Langkah 2:**
-Klik New, masukan nama Repository, lalu aturlah pengaturan seperti apakah proyek kita ingin agar dapat diakses secara umum atau hanya diakses oleh kita dengan mengatur pada bagian public atau private. Berikan juga deskripsi namun bersifat opsional.
+Masukan nama Repository, lalu aturlah pengaturan seperti apakah proyek kita ingin agar dapat diakses secara umum atau hanya diakses oleh kita dengan mengatur pada bagian public atau private. Berikan juga deskripsi namun bersifat opsional.
 
-![[Belajar_Github/Asset/gambar123.png]]
+![[Belajar_Github/Asset/gambar123.jpg]]
 
 **Langkah 3:**
 Setelah semua siap, klik create Repository 
-![[Belajar_Github/Asset/gambar13.png]]
+![[Belajar_Github/Asset/gambar13.jpg]]
 
 Dengan denikian selesailah pembuatan repository untuk proyek kita
 # Konfigurasi Awal di Git Bash 
@@ -81,7 +84,7 @@ Tampilkanlah semua konfig yang ada di Git pada komputer kita
 ```bash
 git config --list
 ```
-![[Belajar_Github/Asset/gambar14.png]]
+![[Belajar_Github/Asset/gambar14.jpg]]
 
 **Langkah 2:**
 Sekarang hubungkanlah username Github dengan Gitbash kita
@@ -89,90 +92,90 @@ Sekarang hubungkanlah username Github dengan Gitbash kita
 git config --global user.name "condradoabri17"
 ```
 
-![[Belajar_Github/Asset/gambar15.png]]
+![[Belajar_Github/Asset/gambar15.jpg]]
 
 **Lamgkah 3:**
 Sekarang hubungkanlah email github dengan gitbash kita.
 ```bash
 git config --global user.email "condradoabri17@gmail.com"
 ```
-![[Belajar_Github/Asset/gambar16.png]]
+![[Belajar_Github/Asset/gambar16.jpg]]
 
 **Langkah 4:**
 Dengan langkah-langkah diatas,username dan email Github akan terhubung. 
 Cara mengeceknya, ketik perintah `config --list` dan muncul nama username dan email kita:
 
-![[Belajar_Github/Asset/tambahan.png]]
+![[Belajar_Github/Asset/tambahan.jpg]]
 # Akses Folder Proyek di Git Bash
 Sekarang adalah menghubungkan folder kita dengan github. Untuk langkah awal kita akan mengubah direktori di Git Bash.
 ```bash
 pwd
 ```
-![[Belajar_Github/Asset/tambahan21.png]]
+![[Belajar_Github/Asset/tambahan21.jpg]]
 
 Berdasarkan `pwd` kita melihat bahwa direktori yang diakses adalah /c/Users/lenovo, sedangkan folder yang akan kita gunakan untuk dihubungkan ke Github berada di D. Untuk mengubahnya ikut langkah berikut:
 
 **Langkah 1:**
 Ubahlah direktori kita ke direktori dimana folder yang akan kita hubungkan disimpan menggunakan perinta `cd`. Pada praktek ini tujuan direktori kita adalah "D/Documents/ObsidianGit".
 
-![[Belajar_Github/Asset/tambahan3.png]]
+![[Belajar_Github/Asset/tambahan3.jpg]]
 
 Dengan perintah `cd` dan tujuan direktori yang tepat, maka kita sudah berhasil masuk ke direktori folder yang akan digunakan untuk menghubungkannya.
 
 Untuk memeriksa isi file direktori kita  gunakan perintah `ls`.
 
-![[Belajar_Github/Asset/tambahan4.png]]
+![[Belajar_Github/Asset/tambahan4.jpg]]
 Pada direktori ini terdapat foldrr bernama "BelajarGit". Folder ini yang akan kita gunakan untuk menghubungkannya dengan Github.
 # Hubungkan Folder Proyek Lokal ke Github
 
 **Langkah 1:**
 Inisialisasi sebuah repositori Git baru kedalam direktori saat ini dengan perintah `git init`.
 ![[null]]
-![[Belajar_Github/Asset/tambahan5.png]]
+![[Belajar_Github/Asset/tambahan5.jpg]]
 Jika sudah muncul tulisan `(master)` disamping direktori kita maka kita sudah berhasi melakukan inisialisasi.
 
 **Langkah 2:**
 Sekarang buatkanlah remote repository dari Repository di Git ke repositori Git lokal. Copy terlebih dahulu link repository git kita:
 
-![[Belajar_Github/Asset/gambar21.png]]
+![[Belajar_Github/Asset/gambar21.jpg]]
 ![[null]]
 Lalu kolaborasikan dengan perintah berikut:
 ```bash
 git remote add origin "https://github.com/condradoabri17/BelajatGit.git"
 ```
-![[Belajar_Github/Asset/tambahan6.png]]
+![[Belajar_Github/Asset/tambahan6.jpg]]
 
 **Langkah 3:**
 Sekarang cek status commit/koneksi file ke github dengan perintah `git status`.
 
-![[Belajar_Github/Asset/gambar17.png]]
+![[Belajar_Github/Asset/gambar17.jpg]]
 Dengan demikian kita sudah berhasil menghubungkan antara Github dengan direktori kita. 
 
 **Langkah 4:**
 Tambahkan semua file-file baru atau perubahan menggunakan Ketik `git add.` 
-![[Belajar_Github/Asset/gambar18.png]]
+![[Belajar_Github/Asset/gambar18.jpg]]
 
 Perintah `git add` digunakan untuk menambahkan perubahan yang telah Anda buat pada file ke dalam staging area (area penampungan) di Git. Staging area adalah langkah antara pengeditan file dan melakukan komit (commit) dalam repositori Git. Dengan menambahkan file ke staging area, Anda memberi tahu Git bahwa perubahan pada file tersebut siap untuk dicommit.
 
 **Langkah 5:**
 Sekarang tambahkan pesan commit menggunakan `git commit -m "Awal belajar"`. Jadi nantinya pesan perubahan kita di Github adalah "Awal belajar".
 
-![[Belajar_Github/Asset/gambar19.png]]
-
+![[null]]
+![[Belajar_Github/Asset/gambar19.jpg]]
 **Langkah 6:**
 Sekarang setelah perubahan yang dilakukan berhasil ditambahkan pesannya, langkah selanjutnya adalah unggah seluruh perubahan menggunakan `git push origin master`
 
-![[Belajar_Github/Asset/gambar20.png]]
+![[Belajar_Github/Asset/gambar20.jpg]]
 
 Dengan perintah `git push origin master` Maka kita sudah berhasil mengunggah pesan commit perubahan kita ke dalam Github kita.
 
 Berikut tampilannya:
 
 *Sebelum:*
-![[Belajar_Github/Asset/gambar21.png]]
+![[Belajar_Github/Asset/gambar21.jpg]]
 
 *Sesudah:*
-![[Belajar_Github/Asset/gambar22.png]]
+![[Belajar_Github/Asset/gambar22.jpg]]
 
 Dengan munculnya File kita pada repository Github maka kita telah berhasil menghubungkan file lokal kita dengan GitHub.
 
@@ -183,14 +186,14 @@ Contohnya adalah perubahan ini. Setelah melakukan perubahan kita membuat commit 
 ```bash
 $ git commit -m "Awal belajar 3"
 ```
-![[Belajar_Github/Asset/gambar23.png]]
+![[Belajar_Github/Asset/gambar23.jpg]]
 
 Setelah itu unggah kembali perubahan kita dengan perintah `git push origin master` Untuk mengupdate perubahan pada repository kita.
 
 *Sebelum:*
-![[Belajar_Github/Asset/gambar24.png]]
+![[Belajar_Github/Asset/gambar24.jpg]]
 
 *Sesudah:*
-![[Belajar_Github/Asset/gambar25.png]]
+![[Belajar_Github/Asset/gambar25.jpg]]
 
 Dengan Demikian kita sudah berhasil melakukan update dari data lokal dan terelasi juga pada Repository kita.

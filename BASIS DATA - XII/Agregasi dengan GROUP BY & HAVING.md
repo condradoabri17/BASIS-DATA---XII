@@ -530,7 +530,6 @@ WHERE jabatan = `Staff` OR jabatan = 'Sales'
 GROUP BY NoCab HAVING SUM(Gaji) <= 26000000
 ```
 Hasil:
-![[Belajar_Github/Gambar/gambar23.jpg]]
 ![](Assets/gambar23.jpg)
 
 Penjelasan:
@@ -563,4 +562,3 @@ Penjelasan:
     - **`HAVING`**: Digunakan untuk memfilter hasil setelah pengelompokan yang dilakukan oleh `GROUP BY`. Berbeda dengan `WHERE`, yang memfilter baris sebelum pengelompokan, `HAVING` memfilter hasil dari `GROUP BY`.
     - **`SUM(Gaji) <= 26000000`**: Kondisi ini memastikan bahwa hanya cabang-cabang yang memiliki total gaji kurang dari atau sama dengan 26.000.000 yang akan ditampilkan dalam hasil.
 
-![[BASIS DATA - XII/Assets/tambahan3.jpg]]

@@ -1,3 +1,4 @@
+# Create database dan Tabel Pegawai 
 Praktek kali ini adalah membuat sebuah database perusahaan dengan tabel pegawai didalamnya. Untuk merealisasikannya, kita perlu membuat database untuk menampung tabel pegawai kita. Masuk ke aplikasi XAMPP, klik start pada tombol MySQL. Setelah menyala, klik tombol shell untuk masuk ke command promp.
 
 Langkah-langkah pembuatan database:
@@ -67,6 +68,15 @@ Penjelasan
 - `pegawai`: Nama tabel yang ingin Kita lihat strukturnya.
 Hasil:
 ![](Assets/gambar5.jpg)
+- Kolom `NIP` menggunaan tipe data `int` dan `primary key` dikarenakan kolom ini merupakan data unique, dimana data inilah yang membedakan antara satu pegawai dengan pegawai lainnya, dan alasan digunakannya `int` sebagai tipe datanya adalah karena isi dari datanya nantinya berupa angka. Karena kolom ini adalah `primary` maka kolom ini otomatis `not null`
+- Kolom `NDep` merupakan kolom untuk mengisi nama depan dari pegawai. Karena isi dari kolom ini adalah karakter, maka kolom ini menggunakan tipe data `varchar`. Kolom ini juga menggunakan constrain `NOT NULL` agar mencegah kolom kosong karean pegawai diwajibkan memasukan minimal nama depan mereka.
+- Kolom `NBlk` merupakan kolom untuk menampung data nama belakang dari pegawai. Karena isi dari kolom ini nantinya adalah karakter, maka kolom ini menggunakan tipe data `varchar`. Kolom ini tidak diatur dengan constrain `not null` karena tiap pegawai tidak semua memiliki nama belakang sehingga data kolom bisa kosong.
+- Kolom `JK` merupakan kolom untuk memilih jenis kelamin dari pegawai. Data yang bisa akan dimasukannya nantinya hanya bisa dua yaitu Laki-laki (L) dan Perempuan (P), maka tipe data yang tepat untuk kolom ini adalah `ENUM` dengan value `('P', 'L')`. Nantinya pegawai hanya boleh memilih antara pilihan `P` atau `L` untuk mengidentifikasi jenis kelamin mereka. Karena data ini akan memilih jenis kelamin, maka kolom tidak boleh kosong, maka digunakanlah constrain `NOT NULL`.
+- Kolom `Alamat` merupakan kolom untuk memasukan alamat pegawai. Karena nantinya data yang dimasukkan adalah alamat, maka data tentunya akan memiliki value panjang sehingga tipe data `varchar` tidak akan mencukupi valuenya. Oleh karena itu digunakanlah tipe data `TEXT` sebagai alternatifnya. Alamat sendiri tidak boleh kosong oleh karena itu digunakanlah constrain `NOT NULL`.
+- Kolom `telp` merupakan kolom untuk memasukan nomor telepon pegawai. Nomor telepon sendiri memang merupakan angka, namun nomor telepon yang akan dimasukkan akan menggunakan simbol garis hubung (-) untuk memudahkan pembacaan nomor. karena garis hubung merupakan karakter, maka digunakanlah tipe data `varchar` sebagai alternatifnya. Nomor telepon tidak boleh kosong sehingga digunakanlah constrain `Not Null`.
+- Kolom `Jabatan` merupakan kolom untuk memasukan jabatan pegawai. Dalam perusahaan ini hanya terdapat 3 jabatan yang boleh dipilih yaitu 'Manajer', 'Sales', 'Staf'. Karena itu kita kembali menggunakan tipe data `ENUM` dengan value jabatan tersebut, agar pegawai hanya dapat memilih ketiga jabatan tersebut. Karena salah satu data dari pegawai tidak memasukan jabatan mereka, maka kolom ini menggunakan constrain `Null` agar kolomnya bisa kosong.
+- Kolom `Gaji` merupakan kolom untuk memasukan gaji pegawai. Sama seperti alamat tadi, nilai gaji yang akan dimasukkan tidak akan mencukupi jika harus menggunakan tipe data `int`. Oleh karena itu, digunakanlah `bigint` sebagai alternatif. Karena isi dari kolom Gaji tidak boleh kosong, maka digunakanlah constrain `NOT NULL`.
+- Kolom `NoCab` merupakan kolom untuk memasukan nomor cabang. Karena isi datanya merupakan gabungan antara huruf dan angka, maka digunakanlah tipe data `varchar`. Kolom tidak boleh kosong, maka digunakanlah constrain `not null`.
 
 7. Setelah memastikan struktur tabel sudah tepat, saatnya memasukan data pada tabel yang telah dibuat. Untuk datanya menggunakan refrensi sebagai berikut:
 ![](Assets/tambahan3.jpg)
@@ -114,3 +124,443 @@ Penjelasan:
 
 Hasil:
 ![](Assets/gambar4.jpg)
+
+# Menyeleksi Data Berdasarkan Nilai
+Untuk menampilkan data atau menyeleksi data berdasarkan nilai tertentu kita dapat mennggunakan perintah `select count` dan untuk membuat visual tabel baru gunakan perintah `as nama_tampilan_tabel`. 
+
+Contoh:
+```sql
+SELECT COUNT(NIP) AS JumlahPegawai, COUNT(jabatan) AS JumlahJabatan
+```
+Hasil:
+![](Assets/gambar6.jpg)
+
+Penjelasan:
+- **`SELECT COUNT(NIP) AS JumlahPegawai`**:
+    - Fungsi `COUNT(NIP)` menghitung data di mana kolom `NIP` tidak bernilai `NULL`.
+    - Hasil dari perhitungan ini diberi tabel baru (alias) sebagai `JumlahPegawai`, yang berarti jumlah pegawai yang memiliki NIP.
+- **`COUNT(jabatan) AS JumlahJabatan`**:
+    - Fungsi `COUNT(jabatan)` menghitung data di mana kolom `jabatan` tidak bernilai `NULL`.
+    - Hasilnya diberi alias sebagai `JumlahJabatan`, yang berarti jumlah jabatan yang terdaftar di dalam tabel.
+
+# Menyeleksi Data berdasarkan nilai dan Kriteria tertentu
+Untuk menampilkan data atau menyeleksi data berdasarkan nilai dan kriteria tertentu kita dapat mennggunakan perintah `select count` dan untuk kriterianya dalam kasus ini kita gunakan `where kriteria` dan untuk membuat visual tabel baru gunakan perintah `as nama_tampilan_tabel`. 
+
+Contoh:
+```sql
+SELECT COUNT(NIP) AS JumlahPegawai
+FROM pegawai
+WHERE NoCab = 'C102';
+```
+Hasil:
+![](Assets/gambar7.jpg)
+
+Penjelasan:
+- **`SELECT COUNT(NIP) AS JumlahPegawai`**:
+    - `SELECT` digunakan untuk memilih kolom atau data yang akan ditampilkan dari hasil query.
+    - `COUNT(NIP)` menghitung jumlah baris di mana kolom `NIP` tidak bernilai `NULL`. Ini berarti menghitung jumlah pegawai yang memiliki NIP di dalam hasil filter (yaitu yang bekerja di cabang tertentu).
+    - Hasil dari `COUNT(NIP)` diberi alias sebagai `JumlahPegawai`, sehingga hasilnya akan tampil dengan nama kolom `JumlahPegawai`.
+- **`FROM pegawai`**:
+    - `FROM` menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`WHERE NoCab = 'C102'`**:
+    - `WHERE` digunakan untuk memfilter data berdasarkan kondisi tertentu.
+    - `NoCab = 'C102'` adalah kondisi yang memfilter hanya baris-baris yang memiliki nilai `'C102'` di kolom `NoCab`. Dengan kata lain, hanya pegawai yang berada di cabang dengan kode `'C102'` yang akan dihitung.
+# Count dan Group By
+`GROUP BY` adalah kode dalam SQL yang digunakan untuk mengelompokkan baris-baris hasil query berdasarkan satu atau lebih kolom.
+
+Query:
+```sql
+SELECT NoCab, COUNT(NIP) AS Jumlah_Pegawai
+FROM pegawai
+GROUP BY NOCab
+```
+Hasil:
+![](Assets/gambar8.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, COUNT(NIP) AS Jumlah_Pegawai`**:
+    - `SELECT` digunakan untuk memilih kolom yang ingin ditampilkan dalam hasil query.
+    - `NoCab`: Kolom ini menunjukkan kode cabang. Kolom ini akan ditampilkan sebagai hasil dan menjadi dasar pengelompokan data.
+    - `COUNT(NIP) AS Jumlah_Pegawai`: Fungsi `COUNT(NIP)` menghitung jumlah baris di mana kolom `NIP` tidak bernilai `NULL` untuk setiap cabang. Hasilnya diberi alias sebagai `Jumlah_Pegawai`, yang berarti jumlah pegawai di masing-masing cabang.
+- **`FROM pegawai`**:
+    - `FROM` menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - `GROUP BY` digunakan untuk mengelompokkan baris-baris hasil query berdasarkan kolom `NoCab`.
+    - Setiap kelompok berisi semua baris dengan nilai `NoCab` yang sama.
+    - Setelah dikelompokkan berdasarkan `NoCab`, fungsi `COUNT(NIP)` akan menghitung jumlah pegawai (`NIP`) di setiap cabang (`NoCab`).
+
+# GROUP BY DAN HAVING COUNT
+`GROUP BY` dan `HAVING` adalah dua klausa yang sering digunakan bersama dalam SQL untuk mengelompokkan data dan kemudian memfilter hasil berdasarkan kondisi tertentu, terutama ketika menggunakan fungsi agregat seperti `COUNT`.
+
+Query:
+```sql
+SELECT NoCab, COUNT(NIP) AS Jumlah_Pegawai
+FROM pegawai
+GROUP BY NoCab HAVING COUNT(NIP) >= 3;
+```
+Hasil:
+![](Assets/gambar9.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, COUNT(NIP) AS Jumlah_Pegawai`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom yang ingin ditampilkan dalam hasil query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang, yang akan ditampilkan dalam hasil.
+    - **`COUNT(NIP) AS Jumlah_Pegawai`**: Fungsi `COUNT(NIP)` menghitung jumlah baris di mana kolom `NIP` tidak bernilai `NULL` dalam setiap grup `NoCab`. Hasilnya diberi alias sebagai `Jumlah_Pegawai`, yang berarti jumlah pegawai di masing-masing cabang.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`, sehingga setiap kelompok terdiri dari semua baris yang memiliki nilai `NoCab` yang sama.
+    - Setelah data dikelompokkan, fungsi `COUNT(NIP)` akan menghitung jumlah pegawai (`NIP`) di setiap kelompok `NoCab`.
+- **`HAVING COUNT(NIP) >= 3`**:
+    - **`HAVING`**: Digunakan untuk memfilter hasil setelah data dikelompokkan.
+    - **`COUNT(NIP) >= 3`**: Kondisi ini memfilter kelompok-kelompok yang telah dibentuk oleh `GROUP BY` sehingga hanya kelompok yang memiliki `COUNT(NIP)` (jumlah pegawai) lebih besar atau sama dengan 3 yang akan ditampilkan dalam hasil akhir.
+
+# SELECT SUM
+`SUM` adalah fungsi agregat dalam SQL yang digunakan untuk menjumlahkan nilai-nilai numerik dalam suatu kolom. Fungsi ini menghitung total dari semua nilai yang dipilih, baik dalam seluruh tabel atau dalam kelompok tertentu jika digunakan bersama dengan `GROUP BY`.
+
+Query:
+```sql
+SELECT SUM(Gaji) AS Total_Gaji
+FROM pegawai;
+```
+Hasil:
+![](Assets/gambar10.jpg)
+
+Penjelasan:
+- **`SELECT SUM(Gaji) AS Total_Gaji`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau data yang ingin ditampilkan dari hasil query.
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji`. Ini berarti bahwa total dari semua gaji pegawai akan dihitung.
+    - **`AS Total_Gaji`**: Memberi alias pada hasil perhitungan `SUM(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `Total_Gaji`
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+
+# Lanjutan Select Sum 
+
+Query:
+```sql
+SELECT SUM(Gaji) AS Gaji_Manajer
+FROM pegawai
+WHERE jabatan = 'Manajer';
+```
+Hasil:
+![](Assets/gambar11.jpg)
+
+Penjelasan:
+- **`SELECT SUM(Gaji) AS Gaji_Manajer`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau data yang ingin ditampilkan dari hasil query.
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji`. Dalam hal ini, hanya gaji pegawai yang memenuhi kondisi tertentu (yaitu, pegawai yang memiliki jabatan "Manajer") yang akan dijumlahkan.
+    - **`AS Gaji_Manajer`**: Memberi alias pada hasil perhitungan `SUM(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `Gaji_Manajer`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`WHERE jabatan = 'Manajer'`**:
+    - **`WHERE`**: Digunakan untuk memfilter data berdasarkan kondisi tertentu.
+    - **`jabatan = 'Manajer'`**: Kondisi ini memastikan bahwa hanya baris-baris yang memiliki nilai "Manajer" pada kolom `jabatan` yang akan disertakan dalam perhitungan `SUM(Gaji)`.
+
+# Gabungan Sum dan Group By
+
+Query:
+```sql
+SELECT NoCab, SUM(Gaji) AS TotalGaji
+FROM pegawai
+GROUP BY NoCab
+```
+Hasil:
+![](Assets/gambar12.jpg)
+
+Penjelasan:
+1. **`SELECT NoCab, SUM(Gaji) AS TotalGaji`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom yang ingin ditampilkan dalam hasil query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Kolom ini akan ditampilkan sebagai hasil dan digunakan untuk pengelompokan data.
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji` untuk setiap cabang. Ini berarti bahwa total gaji dari semua pegawai di setiap cabang akan dihitung.
+    - **`AS TotalGaji`**: Memberi alias pada hasil perhitungan `SUM(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `TotalGaji`.
+2. **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+3. **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`, sehingga setiap kelompok terdiri dari semua baris yang memiliki nilai `NoCab` yang sama.
+    - Setelah data dikelompokkan, fungsi `SUM(Gaji)` akan menghitung total gaji untuk setiap kelompok `NoCab`.
+# ss
+
+Query:
+```sql
+SELECT NoCab, SUM(Gaji) AS TotalGaji 
+FROM pegawai
+GROUP BY NoCab HAVING SUM(Gaji) >= 8000000;
+```
+Hasil:
+![](Assets/gambar13.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, SUM(Gaji) AS TotalGaji`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau data yang ingin ditampilkan dalam hasil query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Kolom ini akan ditampilkan dalam hasil query dan digunakan untuk pengelompokan data.
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji` untuk setiap cabang. Ini berarti bahwa total gaji dari semua pegawai di setiap cabang akan dihitung.
+    - **`AS TotalGaji`**: Memberi alias pada hasil perhitungan `SUM(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `TotalGaji`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`. Setiap grup terdiri dari baris-baris yang memiliki nilai `NoCab` yang sama. Setelah data dikelompokkan, fungsi `SUM(Gaji)` akan menghitung total gaji untuk setiap kelompok `NoCab`.
+- **`HAVING SUM(Gaji) >= 8000000`**:
+    - **`HAVING`**: Digunakan untuk memfilter hasil setelah data dikelompokkan.
+    - **`SUM(Gaji) >= 8000000`**: Kondisi ini memfilter kelompok-kelompok yang telah dibentuk oleh `GROUP BY` sehingga hanya kelompok yang memiliki `SUM(Gaji)` (total gaji) lebih besar atau sama dengan 8.000.000 yang akan ditampilkan dalam hasil akhir.
+
+# Select AVG
+`AVG` adalah fungsi agregat dalam SQL yang digunakan untuk menghitung rata-rata nilai dari suatu kolom numerik. Fungsi ini menambahkan semua nilai dalam kolom yang dipilih dan membaginya dengan jumlah baris yang ada (yang nilainya tidak null) untuk menghasilkan rata-rata.
+
+Query:
+```sql
+SELECT AVG(Gaji) AS Rata_rata
+FROM pegawai;
+```
+Hasil:
+![](Assets/gambar14.jpg)
+
+Penjelasan:
+- **`SELECT AVG(Gaji) AS Rata_rata`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dari kolom `Gaji`. Ini berarti bahwa nilai-nilai gaji dari semua pegawai akan dijumlahkan dan kemudian dibagi dengan jumlah pegawai untuk mendapatkan rata-ratanya.
+    - **`AS Rata_rata`**: Memberi alias pada hasil perhitungan `AVG(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `Rata_rata`. Ini mempermudah pembacaan hasil query.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+
+# Lanjutan Select AVG
+
+Query:
+```sql
+SELECT AVG(Gaji) AS Rata_rataMGr
+FROM pegawai
+WHERE jabatan = 'Manajer';
+```
+Hasil:
+![](Assets/gambar15.jpg)
+
+Penjelasan:
+- **`SELECT AVG(Gaji) AS Rata_rataMGr`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dari kolom `Gaji`. Dalam hal ini, hanya gaji dari pegawai yang memiliki jabatan "Manajer" yang akan dihitung rata-ratanya.
+    - **`AS Rata_rataMGr`**: Memberi alias pada hasil perhitungan `AVG(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `Rata_rataMGr`. Ini mempermudah pembacaan hasil query, yang menunjukkan bahwa rata-rata gaji ini khusus untuk manajer.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`WHERE jabatan = 'Manajer'`**:
+    - **`WHERE`**: Digunakan untuk memfilter data yang akan diproses oleh query.
+    - **`jabatan = 'Manajer'`**: Kondisi ini memastikan bahwa hanya baris-baris yang memiliki nilai "Manajer" pada kolom `jabatan` yang akan disertakan dalam perhitungan rata-rata gaji.
+
+# AVG dan Group By
+
+Query:
+```sql
+SELECT NoCab, AVG(Gaji) AS RataGaji
+FROM pegawai
+GROUP BY NoCAb
+```
+Hasil:
+![](Assets/gambar16.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, AVG(Gaji) AS RataGaji`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Kolom ini akan ditampilkan dalam hasil query dan digunakan untuk pengelompokan data.
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dari kolom `Gaji` untuk setiap cabang. Ini berarti bahwa rata-rata gaji dari semua pegawai di setiap cabang akan dihitung.
+    - **`AS RataGaji`**: Memberi alias pada hasil perhitungan `AVG(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `RataGaji`. Ini mempermudah pembacaan hasil query.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`. Setiap grup terdiri dari baris-baris yang memiliki nilai `NoCab` yang sama. Setelah data dikelompokkan, fungsi `AVG(Gaji)` akan menghitung rata-rata gaji untuk setiap kelompok `NoCab`.
+
+# Lanjutan AVG, Having, Group By
+
+Query:
+```sql
+SELECT NoCab, AVG(Gaji) AS RataGaji
+FROM pegawai
+GROUP BY NoCab HAVING NoCab = 'C101' OR NoCab = 'C102'; 
+```
+Hasil:
+![](Assets/gambar17.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, AVG(Gaji) AS RataGaji`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Kolom ini akan ditampilkan dalam hasil query dan digunakan untuk pengelompokan data.
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dari kolom `Gaji` untuk setiap cabang. Ini berarti bahwa rata-rata gaji dari semua pegawai di setiap cabang yang dipilih akan dihitung.
+    - **`AS RataGaji`**: Memberi alias pada hasil perhitungan `AVG(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `RataGaji`. Ini mempermudah pembacaan hasil query.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`. Setiap grup terdiri dari baris-baris yang memiliki nilai `NoCab` yang sama. Setelah data dikelompokkan, fungsi `AVG(Gaji)` akan menghitung rata-rata gaji untuk setiap kelompok `NoCab`.
+- **`HAVING NoCab = 'C101' OR NoCab = 'C102'`**:
+    - **`HAVING`**: Digunakan untuk memfilter hasil setelah data dikelompokkan.
+    - **`NoCab = 'C101' OR NoCab = 'C102'`**: Kondisi ini memastikan bahwa hanya kelompok cabang `C101` atau `C102` yang akan ditampilkan dalam hasil. `HAVING` digunakan untuk memfilter kelompok hasil dari `GROUP BY`.
+
+# MAX DAN MIN
+Dalam SQL, fungsi **`MAX`** dan **`MIN`** adalah fungsi agregat yang digunakan untuk menghitung nilai maksimum dan minimum dari sebuah kolom dalam dataset.
+
+Query:
+```sql
+SELECT MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil
+FROM pegawai;
+```
+Hasil:
+![](Assets/gambar18.jpg)
+
+Penjelasan:
+- **`SELECT MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` digunakan untuk mencari nilai maksimum dari kolom `Gaji`, yaitu gaji terbesar di antara semua pegawai.
+    - **`AS GajiTerbesar`**: Memberi alias pada hasil perhitungan `MAX(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerbesar`.
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` digunakan untuk mencari nilai minimum dari kolom `Gaji`, yaitu gaji terkecil di antara semua pegawai.
+    - **`AS GajiTerkecil`**: Memberi alias pada hasil perhitungan `MIN(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerkecil`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+
+# LANJUTA MAX DAN MIN
+
+Query:
+```sql
+SELECT MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil
+FROM pegawai
+WHERE jabatan = 'Manajer';
+```
+Hasil:
+![](Assets/gambar19.jpg)
+
+Penjelasan:
+- **`SELECT MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` digunakan untuk mencari nilai maksimum dari kolom `Gaji`, yaitu gaji terbesar di antara semua pegawai dengan jabatan "Manajer".
+    - **`AS GajiTerbesar`**: Memberi alias pada hasil perhitungan `MAX(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerbesar`.
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` digunakan untuk mencari nilai minimum dari kolom `Gaji`, yaitu gaji terkecil di antara semua pegawai dengan jabatan "Manajer".
+    - **`AS GajiTerkecil`**: Memberi alias pada hasil perhitungan `MIN(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerkecil`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`WHERE jabatan = 'Manajer'`**:
+    - **`WHERE`**: Digunakan untuk memfilter data yang akan diproses oleh query.
+    - **`jabatan = 'Manajer'`**: Kondisi ini memastikan bahwa hanya baris-baris yang memiliki nilai "Manajer" pada kolom `jabatan` yang akan disertakan dalam perhitungan gaji terbesar dan terkecil.
+
+# MAX MIN DAN GROUP BY
+
+Query:
+```sql
+SELECT NoCab, MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil
+FROM pegawai
+GROUP BY NoCab;
+```
+Hasil:
+![](Assets/gambar20.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom atau hasil perhitungan yang ingin ditampilkan dari query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Kolom ini akan ditampilkan dalam hasil query dan digunakan untuk pengelompokan data.
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` menghitung nilai maksimum dari kolom `Gaji` untuk setiap cabang. Ini berarti gaji terbesar di setiap cabang akan dihitung.
+    - **`AS GajiTerbesar`**: Memberi alias pada hasil perhitungan `MAX(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerbesar`.
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` menghitung nilai minimum dari kolom `Gaji` untuk setiap cabang. Ini berarti gaji terkecil di setiap cabang akan dihitung.
+    - **`AS GajiTerkecil`**: Memberi alias pada hasil perhitungan `MIN(Gaji)`, sehingga hasilnya akan ditampilkan dengan nama kolom `GajiTerkecil`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan nilai `NoCab`. Setiap grup terdiri dari baris-baris yang memiliki nilai `NoCab` yang sama. Fungsi agregat seperti `MAX()` dan `MIN()` kemudian diterapkan pada setiap grup.
+
+# LANJUTAN MAX MIN DAN GROUP BY
+
+Query:
+```sql
+SELECT NoCab, MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil
+FROM pegawai
+GROUP BY NoCab HAVING COUNT(NIP) >=3;
+```
+Hasil:
+![](Assets/gambar21.jpg)
+
+Penjelasan:
+- **`SELECT NoCab, MAX(Gaji) AS GajiTerbesar, MIN(Gaji) AS GajiTerkecil`**:
+    - **`SELECT`**: Digunakan untuk memilih kolom dan fungsi agregat yang akan ditampilkan dalam hasil query.
+    - **`NoCab`**: Kolom yang menunjukkan kode cabang. Ini adalah kolom yang digunakan untuk pengelompokan dan juga akan ditampilkan dalam hasil.
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` menghitung nilai maksimum dari kolom `Gaji` untuk setiap grup `NoCab`. Ini memberi gaji terbesar di setiap cabang.
+    - **`AS GajiTerbesar`**: Memberi alias `GajiTerbesar` pada hasil dari `MAX(Gaji)`, sehingga nama kolom dalam hasil query adalah `GajiTerbesar`.
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` menghitung nilai minimum dari kolom `Gaji` untuk setiap grup `NoCab`. Ini memberi gaji terkecil di setiap cabang.
+    - **`AS GajiTerkecil`**: Memberi alias `GajiTerkecil` pada hasil dari `MIN(Gaji)`, sehingga nama kolom dalam hasil query adalah `GajiTerkecil`.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan kolom `NoCab`. Setiap grup terdiri dari baris-baris dengan nilai `NoCab` yang sama. Fungsi agregat seperti `MAX()` dan `MIN()` kemudian diterapkan pada setiap grup.
+- **`HAVING COUNT(NIP) >= 3`**:
+    - **`HAVING`**: Memfilter hasil setelah pengelompokan yang dilakukan oleh `GROUP BY`. Berbeda dengan `WHERE`, yang memfilter baris sebelum pengelompokan, `HAVING` memfilter hasil dari `GROUP BY`.
+    - **`COUNT(NIP) >= 3`**: Menghitung jumlah pegawai dalam setiap grup `NoCab` dan memastikan hanya grup (cabang) yang memiliki setidaknya 3 pegawai yang ditampilkan dalam hasil. Fungsi `COUNT(NIP)` menghitung jumlah pegawai di setiap cabang.
+
+# LANJUTAN MAX MIN DAN AS
+
+Query:
+```sql
+SELECT COUNT(NIP) AS JumlahPegawai, SUM(Gaji) AS TotalGaji,
+AVG(Gaji) AS RataGaji, MAX(Gaji) AS GajiMaks, MIN(Gaji) AS GajiMin
+FROM pegawai
+```
+Hasil:
+![](Assets/gambar22.jpg)
+
+Penjelasan:
+- **`SELECT`**:
+    - Kata kunci ini digunakan untuk menentukan kolom atau hasil perhitungan yang akan ditampilkan dalam hasil query.
+- **`COUNT(NIP) AS JumlahPegawai`**:
+    - **`COUNT(NIP)`**: Fungsi agregat `COUNT()` menghitung jumlah baris yang tidak bernilai `NULL` dalam kolom `NIP`. Karena `NIP` biasanya merupakan nomor identifikasi unik pegawai, fungsi ini menghitung jumlah total pegawai dalam tabel.
+    - **`AS JumlahPegawai`**: Memberi alias `JumlahPegawai` pada hasil dari `COUNT(NIP)`, sehingga kolom ini akan muncul dengan nama `JumlahPegawai` dalam hasil query.
+- **`SUM(Gaji) AS TotalGaji`**:
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji`. Ini menghitung total gaji yang dibayarkan kepada semua pegawai yang ada dalam tabel.
+    - **`AS TotalGaji`**: Memberi alias `TotalGaji` pada hasil dari `SUM(Gaji)`, sehingga kolom ini akan muncul dengan nama `TotalGaji` dalam hasil query.
+- **`AVG(Gaji) AS RataGaji`**:
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dalam kolom `Gaji`. Ini memberikan rata-rata gaji yang diterima oleh pegawai.
+    - **`AS RataGaji`**: Memberi alias `RataGaji` pada hasil dari `AVG(Gaji)`, sehingga kolom ini akan muncul dengan nama `RataGaji` dalam hasil query.
+- **`MAX(Gaji) AS GajiMaks`**:
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` mencari nilai maksimum dalam kolom `Gaji`. Ini memberikan informasi tentang gaji tertinggi yang diterima oleh seorang pegawai.
+    - **`AS GajiMaks`**: Memberi alias `GajiMaks` pada hasil dari `MAX(Gaji)`, sehingga kolom ini akan muncul dengan nama `GajiMaks` dalam hasil query.
+- **`MIN(Gaji) AS GajiMin`**:
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` mencari nilai minimum dalam kolom `Gaji`. Ini memberikan informasi tentang gaji terendah yang diterima oleh seorang pegawai.
+    - **`AS GajiMin`**: Memberi alias `GajiMin` pada hasil dari `MIN(Gaji)`, sehingga kolom ini akan muncul dengan nama `GajiMin` dalam hasil query.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+
+# LANJUTAN MAX MIN GROUP BY HAVING
+
+Query:
+```sql
+SELECT COUNT(NIP) AS JumlahPegawai, SUM(Gaji) AS TotalGaji,
+AVG(Gaji) AS RataGaji, MAX(Gaji) AS GajiMaks, MIN(Gaji) AS GajiMin
+FROM pegawai
+WHERE jabatan = `Staff` OR jabatan = 'Sales'
+GROUP BY NoCab HAVING SUM(Gaji) <= 26000000
+```
+Hasil:
+![[Belajar_Github/Gambar/gambar23.jpg]]
+![](Assets/gambar23.jpg)
+
+Penjelasan:
+- **`SELECT`**:
+    - Kata kunci ini digunakan untuk menentukan kolom atau hasil perhitungan yang akan ditampilkan dalam hasil query.
+- **`COUNT(NIP) AS JumlahPegawai`**:
+    - **`COUNT(NIP)`**: Fungsi agregat `COUNT()` menghitung jumlah baris yang tidak bernilai `NULL` dalam kolom `NIP`. Karena `NIP` biasanya merupakan nomor identifikasi unik pegawai, fungsi ini menghitung jumlah total pegawai yang memiliki jabatan `Staff` atau `Sales` di setiap cabang (`NoCab`).
+    - **`AS JumlahPegawai`**: Memberi alias `JumlahPegawai` pada hasil dari `COUNT(NIP)`, sehingga kolom ini akan muncul dengan nama `JumlahPegawai` dalam hasil query.
+- **`SUM(Gaji) AS TotalGaji`**:
+    - **`SUM(Gaji)`**: Fungsi agregat `SUM()` menjumlahkan semua nilai dalam kolom `Gaji` untuk pegawai yang memiliki jabatan `Staff` atau `Sales` di setiap cabang (`NoCab`). Ini menghitung total gaji yang dibayarkan kepada pegawai dalam jabatan tersebut di setiap cabang.
+    - **`AS TotalGaji`**: Memberi alias `TotalGaji` pada hasil dari `SUM(Gaji)`, sehingga kolom ini akan muncul dengan nama `TotalGaji` dalam hasil query.
+- **`AVG(Gaji) AS RataGaji`**:
+    - **`AVG(Gaji)`**: Fungsi agregat `AVG()` menghitung rata-rata nilai dalam kolom `Gaji` untuk pegawai yang memiliki jabatan `Staff` atau `Sales` di setiap cabang (`NoCab`). Ini memberikan rata-rata gaji yang diterima oleh pegawai dalam jabatan tersebut di setiap cabang.
+    - **`AS RataGaji`**: Memberi alias `RataGaji` pada hasil dari `AVG(Gaji)`, sehingga kolom ini akan muncul dengan nama `RataGaji` dalam hasil query.
+- **`MAX(Gaji) AS GajiMaks`**:
+    - **`MAX(Gaji)`**: Fungsi agregat `MAX()` mencari nilai maksimum dalam kolom `Gaji` untuk pegawai yang memiliki jabatan `Staff` atau `Sales` di setiap cabang (`NoCab`). Ini memberikan informasi tentang gaji tertinggi yang diterima oleh seorang pegawai dalam jabatan tersebut di setiap cabang.
+    - **`AS GajiMaks`**: Memberi alias `GajiMaks` pada hasil dari `MAX(Gaji)`, sehingga kolom ini akan muncul dengan nama `GajiMaks` dalam hasil query.
+- **`MIN(Gaji) AS GajiMin`**:
+    - **`MIN(Gaji)`**: Fungsi agregat `MIN()` mencari nilai minimum dalam kolom `Gaji` untuk pegawai yang memiliki jabatan `Staff` atau `Sales` di setiap cabang (`NoCab`). Ini memberikan informasi tentang gaji terendah yang diterima oleh seorang pegawai dalam jabatan tersebut di setiap cabang.
+    - **`AS GajiMin`**: Memberi alias `GajiMin` pada hasil dari `MIN(Gaji)`, sehingga kolom ini akan muncul dengan nama `GajiMin` dalam hasil query.
+- **`FROM pegawai`**:
+    - **`FROM`**: Menentukan tabel dari mana data akan diambil. Dalam hal ini, data diambil dari tabel `pegawai`.
+- **`WHERE jabatan = 'Staff' OR jabatan = 'Sales'`**:
+    - **`WHERE`**: Digunakan untuk memfilter data sebelum pengelompokan. Hanya baris-baris yang memenuhi kondisi dalam `WHERE` yang akan diproses lebih lanjut.
+    - **`jabatan = 'Staff' OR jabatan = 'Sales'`**: Kondisi ini memastikan hanya pegawai yang memiliki jabatan `Staff` atau `Sales` yang akan disertakan dalam perhitungan.
+- **`GROUP BY NoCab`**:
+    - **`GROUP BY`**: Mengelompokkan data berdasarkan kolom `NoCab`. Setiap grup terdiri dari baris-baris yang memiliki nilai `NoCab` yang sama. Fungsi agregat kemudian diterapkan pada setiap grup.
+    - Setelah data difilter menggunakan `WHERE`, data yang tersisa dikelompokkan berdasarkan cabang (`NoCab`).
+- **`HAVING SUM(Gaji) <= 26000000`**:
+    - **`HAVING`**: Digunakan untuk memfilter hasil setelah pengelompokan yang dilakukan oleh `GROUP BY`. Berbeda dengan `WHERE`, yang memfilter baris sebelum pengelompokan, `HAVING` memfilter hasil dari `GROUP BY`.
+    - **`SUM(Gaji) <= 26000000`**: Kondisi ini memastikan bahwa hanya cabang-cabang yang memiliki total gaji kurang dari atau sama dengan 26.000.000 yang akan ditampilkan dalam hasil.
+
+![[BASIS DATA - XII/Assets/tambahan3.jpg]]

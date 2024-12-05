@@ -368,5 +368,5 @@ HAVING COUNT(e.EskulID) >= 1;
 | 1.  | Condrado           | 3     | Membuat Catatan                                            |
 | 2.  | Adrian             | 3     | Membantu Membuat Catatan                                   |
 | 3.  | Fahri Ilham        | 3     | Membantu membuat Catatan dan mengurus upload file ke drive |
-| 4.  | Muh. Nabil Maulana | 2     | Penyemangat                                                |
+| 4.  | Muh. Nabil Maulana | 3     | Penyemangat                                                |
 | 5.  | Yeremia Tasik      | 3     | Membantu membuat catatan                                   |

@@ -257,7 +257,7 @@ GROUP BY e.EskulID
 HAVING COUNT(s.SiswaID) >= 2;
 ```
 **Hasil:**
-![](Assets/proyek2(11).jpg)
+![](Assets/proyek2(13).jpg)
 
 **Penjelasan:**
 - Dari data di tabel **Siswa**, siswa terhubung dengan ekstrakurikuler:

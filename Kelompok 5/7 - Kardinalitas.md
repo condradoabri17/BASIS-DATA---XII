@@ -17,7 +17,7 @@ Pada contoh kali ini kita akan menggunakan database perpustakaan, dimana kami ak
 **1. One To Many**
 
 *Tabel Buku:*
-![](Assets/buku.jpg)
+![](Kelompok%205/Assets/buku.jpg)
 
 *Tabel Peminjaman:*
 ![](Assets/peminjaman.jpg)
@@ -27,7 +27,7 @@ One To Many dalam hal ini adalah hubungan di mana satu baris data pada tabel A b
 **2. Many To Many**
 
 *Tabel buku:*
-![](Assets/buku.jpg)
+![](Kelompok%205/Assets/buku.jpg)
 
 *Tabel Anggota*
 ![](Assets/anggota.jpg)

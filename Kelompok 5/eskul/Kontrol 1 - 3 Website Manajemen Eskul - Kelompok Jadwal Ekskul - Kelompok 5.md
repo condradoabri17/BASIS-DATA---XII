@@ -3,7 +3,7 @@
 Pada praktik sebelumnya kita telah membuat database sekolah dimana database tiap kelompok disatukan ke dalam 1 database besar yang berelasi. Saat in kami akan merealisasikan databse tersebut menjadi sebuah website utuh, dan kami akan merealisasikan website ini untuk bagian table ekskul saja. berikut adalah 2 fitur yang telah kami buat untuk sementara:
 ## Fitur Data Siswa
 ### Gambar Fitur:
-![[Fitur-1.png]]
+![](asset_eskul/fitur-1.jpg)
 
 ### penjelasannya:
 #### Deskripsi Fitur
@@ -22,7 +22,7 @@ Fitur ini hanya dapat diakses oleh admin. Hal ini bertujuan untuk menjaga keaman
 Fitur manajemen data siswa ini merupakan komponen penting dalam sistem, memberikan kemudahan bagi admin untuk mengelola informasi siswa dengan efisien dan efektif, sekaligus mendukung proses pendaftaran ekstrakurikuler.
 ## Fitur Data Pembina
 ### Gambar Fitur:
-![[Fitur-2.png]]
+![](asset_eskul/fitur-2.jpg)
 ### penjelasannya:
 #### Deskripsi Fitur
 Fitur ini dirancang untuk menampilkan dan mengelola data Pembina ekstrakurikuler dalam sistem. Dilengkapi dengan kemampuan CRUD (Create, Read, Update, Delete), fitur ini memungkinkan admin untuk:
